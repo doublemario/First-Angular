@@ -1,0 +1,11 @@
+<div class="jumbotron" *ngIf="contact">
+  <h1 class="display-4">{{ contact.name }}</h1>
+  <p class="lead">{{ contact.username }}</p>
+  <hr class="my-4">
+  <!-- [(ngModel)] permet de modifier en temps réel grâce au two way data binding -->
+  <input type="text" class="form-control" [(ngModel)]="contact.name">
+</div>
+<div class="jumbotron" *ngIf="!contact">
+  <h1 class="display-4">Welcome</h1>
+  <p>Choisis un contact</p>
+</div>
