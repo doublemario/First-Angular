@@ -24,7 +24,9 @@
   </div>
 
     <div class="col-sm-8">
-      <app-profil [contact]="contactActif"></app-profil>
+      <app-profil
+        [contact]="contactActif"
+      (userhasbeenchanged)="saveContacts()"></app-profil>
     </div>
   </div>
   <footer class="text-center">

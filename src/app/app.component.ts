@@ -5,6 +5,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Contact} from './models/contact';
 import {UserApiService} from './services/user-api.service';
+import {UserStorageService} from './services/user-storage.service';
 
 
 
@@ -41,7 +42,8 @@ import {UserApiService} from './services/user-api.service';
  */
 export class AppComponent implements OnInit {
 
-  constructor(private userApiService: UserApiService){}
+  constructor(private userApiService: UserApiService,
+              private userStorageService: UserStorageService) {}
 
   // déclaration d'une variable titre
   title = 'Gestion de mes contacts';
@@ -85,13 +87,17 @@ export class AppComponent implements OnInit {
   ];
 
 
-  ngOnInit():void{
-    this.userApiService.getContacts().subscribe(
-      contacts => {
+  ngOnInit(): void {
+   /* this.userApiService.getContacts().subscribe(x
         console.log(contacts);
         this.mesContacts = contacts;
       }
-    );
+    );*/
+    /**
+     * Au chargement de l'application, je récupère
+     * les contacts du localstorage
+     */
+    this.mesContacts = this.userStorageService.getContacts();
   }
 
 
@@ -121,5 +127,14 @@ export class AppComponent implements OnInit {
     // Ajout du Contact dans le Tableau
     leContact.id = id += 1;
     this.mesContacts.push(leContact);
+
+    // -- On sauvegarde les Contacts
+    this.saveContacts();
+  }
+  /**
+   * Déclenche la sauvegarde des contacts
+   */
+  saveContacts() {
+    this.userStorageService.save(this.mesContacts);
   }
 }

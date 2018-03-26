@@ -8,6 +8,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { AjouterComponent } from './ajouter/ajouter.component';
 import {UserApiService} from './services/user-api.service';
 import {HttpClientModule} from '@angular/common/http';
+import {UserStorageService} from './services/user-storage.service';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import {HttpClientModule} from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserApiService],
+  providers: [UserApiService,UserStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
